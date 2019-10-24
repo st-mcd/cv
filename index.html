@@ -11,10 +11,203 @@
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/771ec61c41.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      a,
+      a:hover,
+      a:active,
+      a:visited {
+        color: inherit;
+      }
+
+      html {
+        font-family: "Fira Code", monospace;
+
+        height: 100%;
+        background-image: url("img/bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: fixed;
+        background-attachment: scroll;
+        background-position: 50% 50%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: "";
+        z-index: 0;
+
+        color: white;
+      }
+      body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .outer {
+        height: 100%;
+
+        background: linear-gradient(red, transparent),
+          linear-gradient(to top left, lime, transparent),
+          linear-gradient(to top right, blue, transparent);
+        background-blend-mode: luminosity;
+
+        /* background: linear-gradient(320deg, #56189f, #d9b00b);*/
+        background-size: 200% 200%;
+
+        background-position: calc(var(--mouse-x, 0) * 100%)
+          calc(var(--mouse-y, 0) * 100%);
+
+        /* animation: GradiantWave 10s ease infinite; */
+
+        /* backdrop-filter: blur(5px);
+        /* opacity: 0.5;
+        mix-blend-mode: lighten; */
+      }
+
+      .radialtest {
+        background: radial-gradient(#e66465, transparent 50%);
+        width: 300px;
+        height: 300px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+      }
+
+      .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* align-content: center; */
+      }
+
+      @keyframes circle {
+        0% {
+          background-position: 50% 0%;
+        }
+        25% {
+          background-position: 100% 50%;
+        }
+        50% {
+          background-position: 50% 100%;
+        }
+        75% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 50% 0%;
+        }
+      }
+
+      @keyframes GradiantWave {
+        0% {
+          background-position: 0% 2%;
+        }
+        50% {
+          background-position: 100% 99%;
+        }
+        100% {
+          background-position: 0% 2%;
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      h1,
+      h2 {
+        font-weight: normal;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 5.2vw;
+      }
+
+      h2 {
+        font-size: 2vw;
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 10.4vw;
+        }
+
+        h2 {
+          font-size: 4vw;
+        }
+      }
+      /* @media screen and (min-width: 1000px) {
+        h1 {
+          font-size: 5.5vw;
+        }
+
+        h2 {
+          font-size: 2.2vw;
+        }
+      } */
+
+      .flex-col {
+        flex-direction: column;
+      }
+
+      .icon-list {
+        display: flex;
+        /* align-self: center; */
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .icon {
+        font-size: 5vw;
+        padding: 30px;
+      }
+    </style>
   </head>
   <body>
-    <h1>WIP</h1>
+    <!-- <div class="radialtest"></div> -->
+    <div class="outer">
+      <div class="container">
+        <h2>Steven McDonald</h2>
+        <h1>st-mcd</h1>
+        <div class="icon-list">
+          <a href="mailto:steven@st-mcd.com" class="icon"
+            ><i class="far fa-envelope"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/st-mcd/" class="icon"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
     <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
@@ -22,6 +215,16 @@
       </p>
     <![endif]-->
 
-    <script src="" async defer></script>
+    <script type="text/javascript">
+      const root = document.documentElement;
+
+      document.addEventListener("mousemove", evt => {
+        let x = evt.clientX / innerWidth;
+        let y = evt.clientY / innerHeight;
+
+        root.style.setProperty("--mouse-x", x);
+        root.style.setProperty("--mouse-y", y);
+      });
+    </script>
   </body>
 </html>
