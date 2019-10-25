@@ -197,6 +197,7 @@
       <div class="container">
         <h2>Steven McDonald</h2>
         <h1>st-mcd</h1>
+        <h3 id="orientation"></h3>
         <div class="icon-list">
           <a href="mailto:steven@st-mcd.com" class="icon"
             ><i class="far fa-envelope"></i
@@ -218,13 +219,57 @@
     <script type="text/javascript">
       const root = document.documentElement;
 
-      document.addEventListener("mousemove", evt => {
-        let x = evt.clientX / innerWidth;
-        let y = evt.clientY / innerHeight;
+      function motion(evt) {}
 
-        root.style.setProperty("--mouse-x", x);
-        root.style.setProperty("--mouse-y", y);
-      });
+      if (window.DeviceOrientationEvent) {
+        // document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+        // Listen for the deviceorientation event and handle the raw data
+        window.addEventListener(
+          "deviceorientation",
+          function(eventData) {
+            // gamma is the left-to-right tilt in degrees, where right is positive
+            var tiltLR = eventData.gamma;
+
+            // beta is the front-to-back tilt in degrees, where front is positive
+            var tiltFB = eventData.beta;
+
+            // alpha is the compass direction the device is facing in degrees
+            var dir = eventData.alpha;
+
+            document.getElementById("orientation").innerHTML =
+              Math.round(tiltLR) +
+              ", " +
+              Math.round(tiltFB) +
+              ", " +
+              Math.round(dir);
+            // document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
+            // document.getElementById("doDirection").innerHTML = Math.round(dir);
+
+            // call our orientation event handler
+            // deviceOrientationHandler(tiltLR, tiltFB, dir);
+          },
+          false
+        );
+      } else {
+        // document.getElementById("doEvent").innerHTML = "Not supported.";
+        console.log("DeviceOrientation not supported.");
+      }
+
+      if (
+        window.DeviceMotionEvent &&
+        window.DeviceMotionEvent.arguments !== null
+      ) {
+        console.log(window);
+        window.addEventListener("devicemotion", motion, false);
+      } else {
+        document.addEventListener("mousemove", evt => {
+          let x = evt.clientX / innerWidth;
+          let y = evt.clientY / innerHeight;
+
+          root.style.setProperty("--mouse-x", x);
+          root.style.setProperty("--mouse-y", y);
+        });
+      }
     </script>
   </body>
 </html>
